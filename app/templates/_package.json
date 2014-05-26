@@ -1,0 +1,19 @@
+{
+  "name": "<%= projectName %>",
+  "version": "0.0.0",
+  "author": "<%= username %>",
+
+  "main": "<%= defaultMain %>",
+
+  "dependencies": {},
+
+  "devDependencies": {
+    "gulp": "^3.6.2",
+    "gulp-typescript-compiler": "^1.0.0",
+    "gulp-shell": "^0.2.5"
+  },
+
+  "scripts" : {
+    "main" : "gulp && node <%= defaultMain %>"
+  }
+}
