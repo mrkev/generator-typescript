@@ -1,6 +1,8 @@
 # generator-typescript [![Build Status](https://secure.travis-ci.org/mrkev/generator-typescript.png?branch=master)](https://travis-ci.org/mrkev/generator-typescript)
 
-> [Yeoman](http://yeoman.io) generator
+> [Yeoman](http://yeoman.io) generator for typescript projects.
+
+** ON THE WORKS / 90% done. **
 
 
 ## Getting Started
