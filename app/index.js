@@ -23,6 +23,8 @@ var TypescriptGenerator = yeoman.generators.Base.extend({
     // Have Yeoman greet the user.
     this.log(yosay('Welcome to the marvelous Typescript generator!'));
 
+    this.extfeat = [ "Throw in some Bower too", "JSHint please",
+                     "Editorconfig would be nice"];
     var prompts = [
     {
       type    : 'input',
@@ -63,9 +65,7 @@ var TypescriptGenerator = yeoman.generators.Base.extend({
       type    : 'checkbox',
       name    : 'extra',
       message : 'Anything else?',
-      choices : [ "Throw in some Bower too", 
-                  "JSHint please",
-                  "Editorconfig would be nice" ],
+      choices : this.extfeat,
       default : []
     },
 
@@ -79,6 +79,10 @@ var TypescriptGenerator = yeoman.generators.Base.extend({
       this.projectName = props.projectName;
       this.extra       = props.extra;
       this.genMaps     = props.genMaps;
+
+      console.log(props.extra.indexOf);
+
+      for (i = 0; i < props)
 
       this.bower       = props.extra.indexOf("Throw in some Bower too")    != -1;
       this.jshint      = props.extra.indexOf("JSHint please")              != -1;

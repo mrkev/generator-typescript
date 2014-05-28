@@ -20,12 +20,15 @@ describe('typescript generator', function () {
   it('creates expected files', function (done) {
     var expected = [
       // add files you expect to exist here.
+      'bower.json',
       '.jshintrc',
       '.editorconfig'
     ];
 
     helpers.mockPrompt(this.app, {
-      'someOption': true
+      'extra': [ "Throw in some Bower too", 
+                  "JSHint please",
+                  "Editorconfig would be nice"]
     });
     this.app.options['skip-install'] = true;
     this.app.run({}, function () {
