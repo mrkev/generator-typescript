@@ -20,15 +20,18 @@ describe('typescript generator', function () {
   it('creates expected files', function (done) {
     var expected = [
       // add files you expect to exist here.
-      'bower.json',
-      '.jshintrc',
-      '.editorconfig'
+      'gulpfile.js',
+      'package.json',
+      'app/src/index.ts',
+      'app/build/'
     ];
 
     helpers.mockPrompt(this.app, {
-      'extra': [ "Throw in some Bower too", 
-                  "JSHint please",
-                  "Editorconfig would be nice"]
+      'projectName': 'test-project',
+      'moduleType' : 'CommonJS',
+      'tsDest'     : 'app/build',
+      'tsSrc'      : 'app/src',
+      'genMaps'    : false
     });
     this.app.options['skip-install'] = true;
     this.app.run({}, function () {

@@ -13,6 +13,7 @@ var TypescriptGenerator = yeoman.generators.Base.extend({
     this.on('end', function () {
       if (!this.options['skip-install']) {
         this.installDependencies();
+        console.log('done');
       }
     });
   },
@@ -23,51 +24,53 @@ var TypescriptGenerator = yeoman.generators.Base.extend({
     // Have Yeoman greet the user.
     this.log(yosay('Welcome to the marvelous Typescript generator!'));
 
-    this.extfeat = [ "Throw in some Bower too", "JSHint please",
-                     "Editorconfig would be nice"];
+    this.extfeat = {"Throw in some Bower too" : "bower", 
+                    "JSHint please" : "jshint", 
+                    "Editorconfig would be nice" : "editorcfg"};
     var prompts = [
     {
       type    : 'input',
       name    : 'projectName',
       message : 'First off, how would you like to name this project?',
       default : 'typescript-project-ftw'
-    },
-    {
+    }
+    
+    ,{
       type    : 'list',
       name    : 'moduleType',
       message : 'Would you like to use AMD or CommonJS?',
       choices : [ "CommonJS", "AMD" ],
       default : "CommonJS"
-    },
+    }
 
-    {
+    ,{
       type    : 'input',
       name    : 'tsDest',
       message : 'Where should it be compiled to?',
       default : "app/build"
-    },
-
-    {
+    }
+    
+    ,{
       type    : 'input',
       name    : 'tsSrc',
       message : 'Where should your typescript go?',
       default : "app/src"
-    },
+    }
 
-    {
+    ,{
       type    : 'confirm',
       name    : 'genMaps',
       message : 'And should I generate sourcemaps?',
       default : false
-    },
+    }
 
-    {
+    /* ,{
       type    : 'checkbox',
       name    : 'extra',
       message : 'Anything else?',
-      choices : this.extfeat,
+      choices : Object.keys(this.extfeat),
       default : []
-    },
+    } */
 
     ];
 
@@ -80,13 +83,16 @@ var TypescriptGenerator = yeoman.generators.Base.extend({
       this.extra       = props.extra;
       this.genMaps     = props.genMaps;
 
-      console.log(props.extra.indexOf);
+      if (props.extra != undefined) {
+        for (var i = 0; i < props.extra.length; i++) {
+          switch (this.extfeat[i]) {
+            case 'bower'    : {this.bower     = true; } break;
+            case 'jshint'   : {this.jshint    = true; } break;
+            case 'editorcfg': {this.editorcfg = true; } break;
+          }
+        }
+      }
 
-      for (i = 0; i < props)
-
-      this.bower       = props.extra.indexOf("Throw in some Bower too")    != -1;
-      this.jshint      = props.extra.indexOf("JSHint please")              != -1;
-      this.editorcfg   = props.extra.indexOf("Editorconfig would be nice") != -1;
 
       // Not prompts
       this.username    = this.user.git.username;

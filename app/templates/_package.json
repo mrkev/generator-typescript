@@ -10,7 +10,8 @@
   "devDependencies": {
     "gulp": "^3.6.2",
     "gulp-typescript-compiler": "^1.0.0",
-    "gulp-shell": "^0.2.5"
+    "gulp-shell": "^0.2.5",
+    "run-sequence":"^0.3.6"
   },
 
   "scripts" : {

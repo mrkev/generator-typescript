@@ -20,7 +20,8 @@
     "app"
   ],
   "keywords": [
-    "yeoman-generator", "typescript"
+    "yeoman-generator",
+    "typescript"
   ],
   "dependencies": {
     "yeoman-generator": "~0.16.0",

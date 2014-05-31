@@ -1,34 +1,37 @@
 var gulp   = require('gulp');
 var tsc    = require('gulp-typescript-compiler');
 var shell  = require('gulp-shell')
+var runseq = require('run-sequence')
 
 var paths = {
 	tscripts : { src : ['<%= tsSrc  %>/**/*.ts'],
 				dest : '<%= tsDest %>' }
 };
 
+gulp.task('compile', ['tsc']);
 gulp.task('tsc', function () {
 	return gulp
 	.src(paths.tscripts.src)
 	.pipe(tsc({
 		module: "<%= moduleType %>",
 		resolve: true,
-		sourcemap : false
+		sourcemap : "<%= genMaps %>"
 	}))
 	.pipe(gulp.dest(paths.tscripts.dest));
 });
 
 gulp.task('run', shell.task([
   'node <%= defaultMain %>'
-]))
+]));
 
-gulp.task('compile', ['tsc']);
-gulp.task('default', ['compile', 'run']);
+gulp.task('default', function (cb) {
+	runseq('compile', 'run', cb);
+});
 
 gulp.task('watch', function () {
 	gulp.watch(paths.tscripts.src, ['tsc']);
 });
 
 gulp.task('watchrun', function () {
-	gulp.watch(paths.tscripts.src, ['compile', 'run']);
+	gulp.watch(paths.tscripts.src, ['default']);
 });
