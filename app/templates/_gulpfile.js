@@ -8,6 +8,7 @@ var paths = {
 				dest : '<%= tsDest %>' }
 };
 
+gulp.task('build', ['tsc']);
 gulp.task('compile', ['tsc']);
 gulp.task('tsc', function () {
 	return gulp
