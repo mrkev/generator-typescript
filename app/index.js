@@ -79,7 +79,7 @@ var TypescriptGenerator = yeoman.generators.Base.extend({
       this.tsSrc       = props.tsSrc;
       this.tsDest      = props.tsDest;
       this.genMaps     = props.genMaps;
-      this.projectName = props.projectName;
+      this.projectName = props.projectName.replace(" ", "-");
       this.extra       = props.extra;
       this.genMaps     = props.genMaps;
 

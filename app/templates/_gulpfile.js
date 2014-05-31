@@ -9,7 +9,6 @@ var paths = {
 };
 
 gulp.task('build', ['tsc']);
-gulp.task('compile', ['tsc']);
 gulp.task('tsc', function () {
 	return gulp
 	.src(paths.tscripts.src)
@@ -25,14 +24,16 @@ gulp.task('run', shell.task([
   'node <%= defaultMain %>'
 ]));
 
-gulp.task('default', function (cb) {
-	runseq('compile', 'run', cb);
+gulp.task('buildrun', function (cb) {
+	runseq('build', 'run', cb);
 });
 
 gulp.task('watch', function () {
-	gulp.watch(paths.tscripts.src, ['tsc']);
+	gulp.watch(paths.tscripts.src, ['build']);
 });
 
 gulp.task('watchrun', function () {
 	gulp.watch(paths.tscripts.src, ['default']);
 });
+
+gulp.task('default', ['buildrun']);

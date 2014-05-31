@@ -30,27 +30,33 @@ Tell it what to name your project, where to put your files and how to setup your
 
 ### Enjoy!
 
-This generator comes with Gulp with tasks for compiling and running. 
+This generator comes with Gulp with tasks for compiling and running.
 
-To build all typescript source:
+To build and run the project:
+ 
+`$ gulp`
+
+To build only:
 
 `$ gulp build`
 
-To run the newly generated `index.js`:
+To run only:
 
 `$ gulp run`
 
-To automatically compile when a file changes:
+To automatically build when a file changes:
 
 `$ gulp watch`
 
-To automatically compile and run when a file changes
+To automatically build and run when a file changes
 
 `$ gulp watchrun`
 
 ### Extend?
 
-Edit `gulpfile.js` to change de default file to run or the paths to watch. Do you feel like flipping tables because this generator is missing some kick-ass feature? I'll keep an eye at issues for table flips `(╯°□°）╯︵ ┻━┻`.
+Edit `gulpfile.js` to change de default file to run or the paths to watch. Do you feel like flipping tables because this generator is missing some kick-ass feature? I'll keep an eye at issues for table flips.
+
+`(╯°□°）╯︵ ┻━┻`.
 
 ## License
 
