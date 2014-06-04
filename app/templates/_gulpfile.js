@@ -15,7 +15,7 @@ gulp.task('tsc', function () {
 	.pipe(tsc({
 		module: "<%= moduleType %>",
 		resolve: true,
-		sourcemap : "<%= genMaps %>"
+		sourcemap : <%= genMaps %>
 	}))
 	.pipe(gulp.dest(paths.tscripts.dest));
 });

@@ -116,7 +116,7 @@ var TypescriptGenerator = yeoman.generators.Base.extend({
   },
 
   projectfiles: function () {
-    if (this.editorcfg) this.copy('editorconfig', '.editorconfig');
+    this.copy('editorconfig', '.editorconfig');
     if (this.jshint)    this.copy('jshintrc', '.jshintrc');
   }
 });
