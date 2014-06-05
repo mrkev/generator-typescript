@@ -8,17 +8,10 @@ var paths = {
 				dest : '<%= tsDest %>' }
 };
 
-gulp.task('build', ['tsc']);
-gulp.task('tsc', function () {
-	return gulp
-	.src(paths.tscripts.src)
-	.pipe(tsc({
-		module: "<%= moduleType %>",
-		resolve: true,
-		sourcemap : <%= genMaps %>
-	}))
-	.pipe(gulp.dest(paths.tscripts.dest));
-});
+gulp.task('default', ['buildrun']);
+
+
+// ** Running ** //
 
 gulp.task('run', shell.task([
   'node <%= defaultMain %>'
@@ -28,6 +21,9 @@ gulp.task('buildrun', function (cb) {
 	runseq('build', 'run', cb);
 });
 
+// ** Watching ** //
+
+
 gulp.task('watch', function () {
 	gulp.watch(paths.tscripts.src, ['build']);
 });
@@ -36,4 +32,16 @@ gulp.task('watchrun', function () {
 	gulp.watch(paths.tscripts.src, ['default']);
 });
 
-gulp.task('default', ['buildrun']);
+// ** Compilation ** //
+
+gulp.task('build', ['compile:typescript']);
+gulp.task('compile:typescript', function () {
+	return gulp
+	.src(paths.tscripts.src)
+	.pipe(tsc({
+		module: "<%= moduleType %>",
+		resolve: true,
+		sourcemap : <%= genMaps %>
+	}))
+	.pipe(gulp.dest(paths.tscripts.dest));
+});

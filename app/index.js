@@ -1,9 +1,9 @@
 'use strict';
 var util = require('util');
 var path = require('path');
-var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
 var chalk = require('chalk');
+var yeoman = require('yeoman-generator');
 
 
 var TypescriptGenerator = yeoman.generators.Base.extend({
@@ -22,17 +22,17 @@ var TypescriptGenerator = yeoman.generators.Base.extend({
     var done = this.async();
 
     // Have Yeoman greet the user.
-    this.log(yosay('Welcome to the marvelous Typescript generator!'));
+    this.log(yosay('Let\'s make some awesome typescript project!'));
+    this.log('I will include JSHint and Editorconfig by default.')
 
-    this.extfeat = {"Throw in some Bower too" : "bower", 
-                    "JSHint please" : "jshint", 
-                    "Editorconfig would be nice" : "editorcfg"};
+    this.extfeat = {"Throw in some Bower too" : "bower"};
+
     var prompts = [
     {
       type    : 'input',
       name    : 'projectName',
       message : 'First off, how would you like to name this project?',
-      default : 'typescript-project-ftw'
+      default : genProjName()
     }
     
     ,{
@@ -117,7 +117,7 @@ var TypescriptGenerator = yeoman.generators.Base.extend({
 
   projectfiles: function () {
     this.copy('editorconfig', '.editorconfig');
-    if (this.jshint)    this.copy('jshintrc', '.jshintrc');
+    this.copy('jshintrc'    , '.jshintrc');
   }
 });
 
@@ -135,4 +135,10 @@ module.exports = TypescriptGenerator;
 function dirFor (path) {
   if (path.indexOf(".") == -1) return path;
   return path.substring(0, path.lastIndexOf("/"));
+}
+
+function genProjName () {
+  var adj = ['awesome', 'marvelous', 'fantastic', 'mathematical', 'algebraic'];
+  var sub = ['project', 'madness', 'goodness', 'awesomeness', 'coolness', 'typescriptness']
+  return adj[Math.floor(Math.random()*adj.length)] + '-typescript-' + sub[Math.floor(Math.random()*sub.length)];
 }

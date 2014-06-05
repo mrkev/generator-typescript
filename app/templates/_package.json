@@ -15,6 +15,6 @@
   },
 
   "scripts" : {
-    "main" : "gulp && node <%= defaultMain %>"
+    "main" : "gulp buildrun"
   }
 }
