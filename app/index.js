@@ -57,25 +57,10 @@ var TypescriptGenerator = yeoman.generators.Base.extend({
       default : "app/src"
     }
 
-    ,{
-      type    : 'confirm',
-      name    : 'genMaps',
-      message : 'And should I generate sourcemaps?',
-      default : false
-    }
-
-    /* ,{
-      type    : 'checkbox',
-      name    : 'extra',
-      message : 'Anything else?',
-      choices : Object.keys(this.extfeat),
-      default : []
-    } */
-
     ];
 
     this.prompt(prompts, function (props) {
-      this.moduleType  = props.moduleType;
+      this.moduleType  = props.moduleType.toLowerCase();
       this.tsSrc       = props.tsSrc;
       this.tsDest      = props.tsDest;
       this.genMaps     = props.genMaps;

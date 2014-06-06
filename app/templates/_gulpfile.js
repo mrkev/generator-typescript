@@ -1,7 +1,7 @@
 var gulp   = require('gulp');
-var tsc    = require('gulp-typescript-compiler');
-var shell  = require('gulp-shell')
-var runseq = require('run-sequence')
+var tsc    = require('gulp-tsc');
+var shell  = require('gulp-shell');
+var runseq = require('run-sequence');
 
 var paths = {
 	tscripts : { src : ['<%= tsSrc  %>/**/*.ts'],
@@ -39,9 +39,7 @@ gulp.task('compile:typescript', function () {
 	return gulp
 	.src(paths.tscripts.src)
 	.pipe(tsc({
-		module: "<%= moduleType %>",
-		resolve: true,
-		sourcemap : <%= genMaps %>
+		module: "<%= moduleType %>"
 	}))
 	.pipe(gulp.dest(paths.tscripts.dest));
 });
