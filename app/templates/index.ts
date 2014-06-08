@@ -1,34 +1,55 @@
-class Controller {
-	private model : Model;
-	private view  : View ;
-
-	constructor () {
-		this.model = new Model("Hello");
-		this.view  = new View();
-	}
-
-	public sayHello () : void {
-		this.view.display (this.model.getGreeting());
-	}
+export interface StringDisplay { 
+	display(msg : string) : void; 
 }
 
-class Model {
-	private greeting : string;
+export module App {
 
-	constructor (greeting : string) {
-		this.greeting = greeting;
+	/**
+	 * Instance is an App controller. Automatically creates 
+	 * model. Creates view if none given.
+	 */
+	export class Controller {
+		private model : Model;
+		private view  : View ;
+
+		constructor (greeting: string, view?: View) {
+			this.model = new Model(greeting);
+			this.view  = (view  || new View());
+		}
+
+		public greet () : void {
+			this.view.display (this.model.getGreeting());
+		}
 	}
 
-	public getGreeting() : string {
-		return this.greeting + " World!";
+	/**
+	 * Private class. Instance is a greeter model.
+	 */
+	class Model {
+		private greeting : string;
+
+		constructor (greeting : string) {
+			this.greeting = greeting;
+		}
+
+		public getGreeting() : string {
+			return this.greeting + ", world!";
+		}
+	}
+
+	/**
+	 * Instance is a view capable of displaying a message.
+	 */
+	export class View implements StringDisplay {
+		public display (msg : string) : void {
+			console.log(msg);
+		}
+	}
+
+	/*
+	 * Factory function. Returns a default first app.
+	 */
+	export function defaultInstance() {
+		return new App.Controller("Hello");
 	}
 }
-
-class View {
-	public display (msg : string) : void {
-		console.log(msg);
-	}
-}
-
-var app = new Controller();
-app.sayHello();

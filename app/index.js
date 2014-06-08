@@ -13,7 +13,6 @@ var TypescriptGenerator = yeoman.generators.Base.extend({
     this.on('end', function () {
       if (!this.options['skip-install']) {
         this.installDependencies();
-        console.log('done');
       }
     });
   },
@@ -90,20 +89,31 @@ var TypescriptGenerator = yeoman.generators.Base.extend({
   },
 
   app: function () {
+    // Folders
     this.mkdir(dirFor(this.tsSrc));
     this.mkdir(dirFor(this.tsDest));
 
+    // Files
     this.copy('index.ts', dirFor(this.tsSrc) + '/index.ts');
     this.template('_package.json', 'package.json');
     this.template('_gulpfile.js', 'gulpfile.js');
 
-    if (this.bower) this.template('_bower.json', 'bower.json');
+    // Tests
+    this.mkdir("test");
+    this.copy("test-greeting.js", 'test/test-greeting.js');
+
+    // Readme
+    this.template('_README.md', 'README.md');
   },
 
   projectfiles: function () {
+    if (this.bower) this.template('_bower.json', 'bower.json');
     this.copy('editorconfig', '.editorconfig');
     this.copy('jshintrc'    , '.jshintrc');
   }
+
+
+
 });
 
 module.exports = TypescriptGenerator;

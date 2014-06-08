@@ -4,6 +4,12 @@ var path = require('path');
 var helpers = require('yeoman-generator').test;
 
 describe('typescript generator', function () {
+  
+  /**
+   * Create the generator.
+   * @param  {Function} done [description]
+   * @return {[type]}        [description]
+   */
   beforeEach(function (done) {
     helpers.testDirectory(path.join(__dirname, 'temp'), function (err) {
       if (err) {
@@ -13,11 +19,17 @@ describe('typescript generator', function () {
       this.app = helpers.createGenerator('typescript:app', [
         '../../app'
       ]);
+
       done();
     }.bind(this));
   });
 
-  it('creates expected files', function (done) {
+  /**
+   * Test1: Create generator with default settings.
+   * @param  {Function} done [description]
+   * @return {[type]}        [description]
+   */
+  it('creates expected files on default settings', function (done) {
     var expected = [
       // add files you expect to exist here.
       'gulpfile.js',
@@ -31,7 +43,6 @@ describe('typescript generator', function () {
       'moduleType' : 'CommonJS',
       'tsDest'     : 'app/build',
       'tsSrc'      : 'app/src',
-      'genMaps'    : false
     });
     this.app.options['skip-install'] = true;
     this.app.run({}, function () {
