@@ -39,7 +39,8 @@ gulp.task('compile:typescript', function () {
 	return gulp
 	.src(paths.tscripts.src)
 	.pipe(tsc({
-		module: "<%= moduleType %>"
+		module: "<%= moduleType %>",
+		emitError: false
 	}))
 	.pipe(gulp.dest(paths.tscripts.dest));
 });

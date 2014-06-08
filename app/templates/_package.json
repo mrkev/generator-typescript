@@ -11,7 +11,8 @@
     "gulp": "^3.6.2",
     "gulp-tsc": "^0.9.0",
     "gulp-shell": "^0.2.5",
-    "run-sequence":"^0.3.6"
+    "run-sequence":"^0.3.6",
+    "mocha" : "*"
   },
 
   "scripts" : {
