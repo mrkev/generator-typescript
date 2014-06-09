@@ -49,7 +49,7 @@ export module App {
 	/*
 	 * Factory function. Returns a default first app.
 	 */
-	export function defaultInstance() {
-		return new App.Controller("Hello");
+	export function defaultGreeter(view? : StringDisplay) {
+		return new App.Controller("Hello", view);
 	}
 }

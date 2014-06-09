@@ -24,11 +24,8 @@ describe('typescript greeter', function () {
    * Test 1: Default greeter works.
    */
   it('constructs a hello world app', function () {
-    console.dir(self.App);
-
     var expected = 'Hello, world!';
     var app = self.App.defaultGreeter(self.testView);
-    console.dir(app.greet);
 
     app.greet();
     assert.equal(expected, self.result);

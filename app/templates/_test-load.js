@@ -2,6 +2,7 @@
 'use strict';
 var assert = require('assert');
 
+
 describe('typescript project', function () {
 	/**
 	 * Test 1: Project is successfully compiled, and can be imported.
