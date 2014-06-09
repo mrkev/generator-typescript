@@ -1,5 +1,5 @@
 /* global describe, it, beforeEach */
-'use strict'; require('typescript-require');
+'use strict';
 var assert  = require('assert');
 
 
