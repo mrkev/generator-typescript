@@ -100,8 +100,8 @@ var TypescriptGenerator = yeoman.generators.Base.extend({
 
     // Tests
     this.mkdir("test");
-    this.template("test-greeting.js", 'test/test-greeting.js');
-    this.template("test-load.js", 'test/test-load.js');
+    this.template("_test-greeting.js", 'test/test-greeting.js');
+    this.template("_test-load.js", 'test/test-load.js');
 
     // Readme
     this.template('_README.md', 'README.md');
