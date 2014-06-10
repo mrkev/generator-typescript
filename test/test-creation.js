@@ -35,12 +35,14 @@ describe('typescript generator', function () {
       'gulpfile.js',
       'package.json',
       'app/src/index.ts',
-      'app/build/'
+      'app/src/app.ts',
+      'app/build/',
+      '.jshintrc',
+      '.editorconfig'
     ];
 
     helpers.mockPrompt(this.app, {
       'projectName': 'test-project',
-      'moduleType' : 'CommonJS',
       'tsDest'     : 'app/build',
       'tsSrc'      : 'app/src',
     });
