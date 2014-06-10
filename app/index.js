@@ -2,7 +2,7 @@
 //var util = require('util');
 //var path = require('path');
 var yosay = require('yosay');
-//var chalk = require('chalk');
+var chalk = require('chalk');
 var yeoman = require('yeoman-generator');
 
 
@@ -58,7 +58,7 @@ var TypescriptGenerator = yeoman.generators.Base.extend({
 
     // Have Yeoman greet the user.
     this.log(yosay('Let\'s make some awesome typescript project!'));
-    this.log('I will include JSHint and Editorconfig by default.');
+    this.log('I will include', chalk.green('JSHint'), 'and', chalk.red('Editorconfig'), 'by default.');
 
     this.extfeat = {'Throw in some Bower too' : 'bower'};
 
