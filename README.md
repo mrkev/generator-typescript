@@ -1,4 +1,4 @@
-# generator-typescript [![Build Status](https://secure.travis-ci.org/mrkev/generator-typescript.png?branch=master)](https://travis-ci.org/mrkev/generator-typescript) ![Dependencies](https://david-dm.org/mrkev/generator-typescript.png)
+# generator-typescript [![Build Status](https://secure.travis-ci.org/mrkev/generator-typescript.png?branch=master)](https://travis-ci.org/mrkev/generator-typescript) [![Dependencies](https://david-dm.org/mrkev/generator-typescript.png)](https://david-dm.org/mrkev/generator-typescript#info=dependencies)
 
 [Yeoman](http://yeoman.io) generator for typescript projects.
 
