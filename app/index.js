@@ -70,6 +70,7 @@ var TypescriptGenerator = yeoman.generators.Base.extend({
       default : genProjName()
     },
 
+    /*
     {
       type    : 'list',
       name    : 'moduleType',
@@ -77,6 +78,7 @@ var TypescriptGenerator = yeoman.generators.Base.extend({
       choices : [ 'CommonJS', 'AMD' ],
       default : 'CommonJS'
     },
+    */
 
     {
       type    : 'input',
@@ -95,7 +97,7 @@ var TypescriptGenerator = yeoman.generators.Base.extend({
     ];
 
     this.prompt(prompts, function (props) {
-      this.moduleType  = props.moduleType.toLowerCase();
+      this.moduleType  = 'commonjs'; //props.moduleType.toLowerCase();
       this.tsSrc       = props.tsSrc;
       this.tsDest      = props.tsDest;
       this.genMaps     = props.genMaps;
@@ -131,6 +133,8 @@ var TypescriptGenerator = yeoman.generators.Base.extend({
 
     // Files
     this.copy('index.ts', dirFor(this.tsSrc) + '/index.ts');
+    this.copy('app.ts'  , dirFor(this.tsSrc) + '/app.ts'  );
+
     this.template('_package.json', 'package.json');
     this.template('_gulpfile.js', 'gulpfile.js');
 

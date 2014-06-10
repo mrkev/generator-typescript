@@ -3,12 +3,11 @@
 var assert = require('assert');
 
 
-describe('typescript project', function () {
+describe('typescript greeter', function () {
 	/**
 	 * Test 1: Project is successfully compiled, and can be imported.
 	 */
 	it('can be imported without blowing up', function () {
-	  var app = require('../<%= tsDest %>');
-	  assert(app !== undefined);
+	  assert(require('../<%= tsDest %>/app.js') !== undefined);
 	});
 });

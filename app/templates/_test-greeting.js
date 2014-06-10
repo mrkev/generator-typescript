@@ -3,11 +3,15 @@
 var assert  = require('assert');
 
 
-
+/**
+ * Test App.js
+ */
 describe('typescript greeter', function () {
   var self = this;
 
-
+  /**
+   * BeforeEach: Create greeter with view to catch messages.
+   */
   beforeEach(function () {
     self.result = '';
 
@@ -17,7 +21,7 @@ describe('typescript greeter', function () {
       }
     };
 
-    self.App = require('../<%= tsDest %>').App;
+    self.App = require('../<%= tsDest %>/app.js');
   });
 
   /**
