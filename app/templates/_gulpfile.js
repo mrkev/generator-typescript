@@ -25,7 +25,7 @@ gulp.task('buildrun', function (cb) {
 
 
 gulp.task('watch', function () {
-	gulp.watch(paths.tscripts.src, ['build']);
+	gulp.watch(paths.tscripts.src, ['compile:typescript']);
 });
 
 gulp.task('watchrun', function () {
