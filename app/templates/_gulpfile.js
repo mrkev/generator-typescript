@@ -29,7 +29,7 @@ gulp.task('watch', function () {
 });
 
 gulp.task('watchrun', function () {
-	gulp.watch(paths.tscripts.src, ['default']);
+	gulp.watch(paths.tscripts.src, runseq('compile:typescript', 'run'));
 });
 
 // ** Compilation ** //
