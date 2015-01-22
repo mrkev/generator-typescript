@@ -1,6 +1,6 @@
 {
   "name": "generator-typescript",
-  "version": "0.2.1",
+  "version": "0.2.3",
   "description": "Yeoman generator for typescript server-side projects",
   "license": "MIT",
   "author": {
@@ -39,8 +39,8 @@
 
   "dependencies": {
     "chalk": "~0.5.1",
-    "yeoman-generator": "^0.17.5",
-    "yosay": "^1.0.0"
+    "yeoman-generator": "^0.18.7",
+    "yosay": "^1.0.2"
   },
   
   "devDependencies": {
