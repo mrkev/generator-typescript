@@ -1,6 +1,6 @@
 {
   "name": "generator-typescript",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Yeoman generator for typescript server-side projects",
   "license": "MIT",
   "author": {
@@ -8,12 +8,12 @@
     "email": "keh222@cornell.edu",
     "url": "https://github.com/mrkev"
   },
-  "repository":{
-    "type" : "git", 
-    "url" : "http://github.com/mrkev/generator-typescript.git"
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/mrkev/generator-typescript.git"
   },
-  "bugs" : {
-    "url" : "https://github.com/mrkev/generator-typescript/issues"
+  "bugs": {
+    "url": "https://github.com/mrkev/generator-typescript/issues"
   },
   "main": "app/index.js",
   "engines": {
