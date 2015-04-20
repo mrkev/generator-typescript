@@ -17,6 +17,6 @@
 
   "scripts" : {
     "main" : "gulp buildrun",
-    "test": "mocha"
+    "test": "gulp build && mocha"
   }
 }
