@@ -12,9 +12,6 @@ describe('typescript:app', function () {
     helpers.run(path.join(__dirname, '../app'))
       .inDir(path.join(os.tmpdir(), './temp'))
       .withOptions({ 'skip-install': true })
-      .withPrompt({
-        someOption: true
-      })
       .on('end', done);
   });
 
