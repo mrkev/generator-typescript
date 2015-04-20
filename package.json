@@ -8,7 +8,11 @@
     "email": "keh222@cornell.edu",
     "url": "https://github.com/mrkev"
   },
-  "repository": "mrkev/generator-typescript",
+  "repository":{
+    "type" : "git", 
+    "url" : "http://github.com/mrkev/generator-typescript.git"
+  },
+  
   "bugs" : {
     "url" : "https://github.com/mrkev/generator-typescript/issues"
   },

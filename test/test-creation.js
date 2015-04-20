@@ -7,8 +7,6 @@ describe('typescript generator', function () {
   
   /**
    * Create the generator.
-   * @param  {Function} done [description]
-   * @return {[type]}        [description]
    */
   beforeEach(function (done) {
     helpers.testDirectory(path.join(__dirname, 'temp'), function (err) {
@@ -26,8 +24,6 @@ describe('typescript generator', function () {
 
   /**
    * Test1: Create generator with default settings.
-   * @param  {Function} done [description]
-   * @return {[type]}        [description]
    */
   it('creates expected files on default settings', function (done) {
     var expected = [
