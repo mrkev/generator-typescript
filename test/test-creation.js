@@ -1,33 +1,25 @@
-/*global describe, beforeEach, it */
+
+/*global describe, beforeEach, it*/
 'use strict';
+
 var path = require('path');
+var assert = require('yeoman-generator').assert;
 var helpers = require('yeoman-generator').test;
+var os = require('os');
 
-describe('typescript generator', function () {
-  
-  /**
-   * Create the generator.
-   */
-  beforeEach(function (done) {
-    helpers.testDirectory(path.join(__dirname, 'temp'), function (err) {
-      if (err) {
-        return done(err);
-      }
-
-      this.app = helpers.createGenerator('typescript:app', [
-        '../../app'
-      ]);
-
-      done();
-    }.bind(this));
+describe('typescript:app', function () {
+  before(function (done) {
+    helpers.run(path.join(__dirname, '../app'))
+      .inDir(path.join(os.tmpdir(), './temp'))
+      .withOptions({ 'skip-install': true })
+      .withPrompt({
+        someOption: true
+      })
+      .on('end', done);
   });
 
-  /**
-   * Test1: Create generator with default settings.
-   */
-  it('creates expected files on default settings', function (done) {
-    var expected = [
-      // add files you expect to exist here.
+  it('creates files', function () {
+    assert.file([
       'gulpfile.js',
       'package.json',
       'app/src/index.ts',
@@ -35,17 +27,6 @@ describe('typescript generator', function () {
       'app/build/',
       '.jshintrc',
       '.editorconfig'
-    ];
-
-    helpers.mockPrompt(this.app, {
-      'projectName': 'test-project',
-      'tsDest'     : 'app/build',
-      'tsSrc'      : 'app/src',
-    });
-    this.app.options['skip-install'] = true;
-    this.app.run({}, function () {
-      helpers.assertFile(expected);
-      done();
-    });
+    ]);
   });
 });
