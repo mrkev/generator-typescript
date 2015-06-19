@@ -1,4 +1,4 @@
-# <%= projectName &>
+# <%= projectName %>
 
 An awesome MVC typescript project, that displays Hello World.
 

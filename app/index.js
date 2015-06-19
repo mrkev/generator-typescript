@@ -4,7 +4,7 @@
 var yosay = require('yosay');
 var chalk = require('chalk');
 var yeoman = require('yeoman-generator');
-
+var mkdirp = require('mkdirp');
 
 /*
  *
@@ -128,8 +128,8 @@ var TypescriptGenerator = yeoman.generators.Base.extend({
 
   app: function () {
     // Folders
-    this.mkdir(dirFor(this.tsSrc));
-    this.mkdir(dirFor(this.tsDest));
+    mkdirp.sync(dirFor(this.tsSrc));
+    mkdirp.sync(dirFor(this.tsDest));
 
     // Files
     this.copy('index.ts', dirFor(this.tsSrc) + '/index.ts');
@@ -139,7 +139,7 @@ var TypescriptGenerator = yeoman.generators.Base.extend({
     this.template('_gulpfile.js', 'gulpfile.js');
 
     // Tests
-    this.mkdir('test');
+    mkdirp.sync('test');
     this.template('_test-greeting.js', 'test/test-greeting.js');
     this.template('_test-load.js', 'test/test-load.js');
 

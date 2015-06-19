@@ -35,7 +35,8 @@
   },
   "dependencies": {
     "chalk": "^1.0.0",
-    "yeoman-generator": "^0.19.2",
+    "mkdirp": "^0.5.1",
+    "yeoman-generator": "^0.20.1",
     "yosay": "^1.0.2"
   },
   "devDependencies": {
