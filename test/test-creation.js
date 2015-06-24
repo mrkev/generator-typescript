@@ -23,7 +23,8 @@ describe('typescript:app', function () {
       'app/src/app.ts',
       'app/build/',
       '.jshintrc',
-      '.editorconfig'
+      '.editorconfig',
+      'tslint.json'
     ]);
   });
 });
