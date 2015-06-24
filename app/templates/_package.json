@@ -9,9 +9,10 @@
 
   "devDependencies": {
     "gulp": "^3.6.2",
-    "gulp-tsc": "^0.9.0",
-    "gulp-shell": "^0.2.5",
-    "run-sequence":"^0.3.6",
+    "gulp-tsc": "^0.10.1",
+    "gulp-shell": "^0.4.2",
+    "gulp-tslint": "^2.0.0",
+    "run-sequence":"^1.1.1",
     "mocha" : "*"
   },
 
