@@ -135,6 +135,8 @@ var TypescriptGenerator = yeoman.generators.Base.extend({
     this.copy('index.ts', dirFor(this.tsSrc) + '/index.ts');
     this.copy('app.ts'  , dirFor(this.tsSrc) + '/app.ts'  );
 
+    this.copy('tslint.json', 'tslint.json');
+
     this.template('_package.json', 'package.json');
     this.template('_gulpfile.js', 'gulpfile.js');
 

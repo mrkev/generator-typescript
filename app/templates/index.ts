@@ -1,5 +1,5 @@
 
-import App = require('./app');
+import App = require("./app");
 
 var greeter = new App.Controller("Whatup");
 
