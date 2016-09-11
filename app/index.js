@@ -42,7 +42,7 @@ function genProjName () {
  */
 
 
-var TypescriptGenerator = yeoman.generators.Base.extend({
+var TypescriptGenerator = yeoman.Base.extend({
   init: function () {
     this.pkg = require('../package.json');
 
@@ -96,7 +96,7 @@ var TypescriptGenerator = yeoman.generators.Base.extend({
 
     ];
 
-    this.prompt(prompts, function (props) {
+    this.prompt(prompts).then(function (props) {
       this.moduleType  = 'commonjs'; //props.moduleType.toLowerCase();
       this.tsSrc       = props.tsSrc;
       this.tsDest      = props.tsDest;
