@@ -3,6 +3,7 @@ var tsc    = require('gulp-tsc');
 var shell  = require('gulp-shell');
 var runseq = require('run-sequence');
 var tslint = require('gulp-tslint');
+var gulpTypings = require("gulp-typings");
 
 var paths = {
   tscripts : { src : ['<%= tsSrc  %>/**/*.ts'],
@@ -53,4 +54,11 @@ gulp.task('lint:default', function(){
         .pipe(tslint.report('prose', {
           emitError: false
         }));
+});
+
+// ** Typings ** //
+ 
+gulp.task("installTypings",function(){
+    return gulp.src("./typings.json")
+          .pipe(gulpTypings())
 });
