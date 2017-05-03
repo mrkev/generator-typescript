@@ -1,17 +1,11 @@
 'use strict';
 //var util = require('util');
-//var path = require('path');
-var yosay = require('yosay');
-var chalk = require('chalk');
-var yeoman = require('yeoman-generator');
-var mkdirp = require('mkdirp');
+const yosay = require('yosay');
+const chalk = require('chalk');
+const mkdirp = require('mkdirp');
+const Generator = require('yeoman-generator');
 
-/*
- *
- * Helper functions
- * 
- */
-
+/////////////////////////////// Helper functions ///////////////////////////////
 
 /**
  * Returns path to directory, excluding file, if
@@ -29,32 +23,16 @@ function dirFor (path) {
  * @return {String} Mathematical title
  */
 function genProjName () {
-  var adj = ['awesome', 'marvelous', 'fantastic', 'mathematical', 'algebraic'];
-  var sub = ['project', 'madness', 'goodness', 'awesomeness', 'coolness', 'typescriptness'];
+  const adj = ['awesome', 'marvelous', 'fantastic', 'mathematical', 'algebraic'];
+  const sub = ['project', 'madness', 'goodness', 'awesomeness', 'coolness', 'typescriptness'];
   return adj[Math.floor(Math.random()*adj.length)] + '-typescript-' + sub[Math.floor(Math.random()*sub.length)];
 }
 
+////////////////////////////////// Generator! //////////////////////////////////
 
-/*
- * 
- * The deal
- * 
- */
+module.exports = class extends Generator {
 
-
-var TypescriptGenerator = yeoman.Base.extend({
-  init: function () {
-    this.pkg = require('../package.json');
-
-    this.on('end', function () {
-      if (!this.options['skip-install']) {
-        this.installDependencies();
-      }
-    });
-  },
-
-  askFor: function () {
-    var done = this.async();
+  prompting() {
 
     // Have Yeoman greet the user.
     this.log(yosay('Let\'s make some awesome typescript project!'));
@@ -62,7 +40,7 @@ var TypescriptGenerator = yeoman.Base.extend({
 
     this.extfeat = {'Throw in some Bower too' : 'bower'};
 
-    var prompts = [
+    const prompts = [
     {
       type    : 'input',
       name    : 'projectName',
@@ -96,7 +74,7 @@ var TypescriptGenerator = yeoman.Base.extend({
 
     ];
 
-    this.prompt(prompts).then(function (props) {
+    return this.prompt(prompts).then(props => {
       this.moduleType  = 'commonjs'; //props.moduleType.toLowerCase();
       this.tsSrc       = props.tsSrc;
       this.tsDest      = props.tsDest;
@@ -115,48 +93,71 @@ var TypescriptGenerator = yeoman.Base.extend({
         }
       }
 
-
       // Not prompts
       this.username    = this.user.git.username;
       this.email       = this.user.git.email;
 
-      this.defaultMain = dirFor(this.tsDest) + '/index.js';
+      this.defaultMain = dirFor(this.tsDest) + '/index.js'
+    })
+  }
 
-      done();
-    }.bind(this));
-  },
+  autocopy () {
+    [].slice.call(arguments).forEach(file => {
+      // A template
+      if (file[0] === '_') {
+        this.fs.copyTpl(
+          this.templatePath(file),
+          this.destinationPath(file.substring(1)),
+          this
+        )
+      } 
 
-  app: function () {
+      // a normal file
+      else {
+        this.fs.copy(
+          this.templatePath(file),
+          this.destinationPath(file)
+        )
+      }
+    })
+  }
+
+
+  writing () {
     // Folders
     mkdirp.sync(dirFor(this.tsSrc));
     mkdirp.sync(dirFor(this.tsDest));
 
-    // Files
-    this.copy('index.ts', dirFor(this.tsSrc) + '/index.ts');
-    this.copy('app.ts'  , dirFor(this.tsSrc) + '/app.ts'  );
+    this.autocopy('index.ts', 'app.ts', 'tslint.json')
 
-    this.copy('tslint.json', 'tslint.json');
+    this.fs.copy(
+      this.templatePath('editorconfig'),
+      this.destinationPath('.editorconfig')
+    )
 
-    this.template('_package.json', 'package.json');
-    this.template('_gulpfile.js', 'gulpfile.js');
+    this.fs.copy(
+      this.templatePath('jshintrc'),
+      this.destinationPath('.jshintrc')
+    )
+
+    this.autocopy('_package.json', '_gulpfile.js', '_README.md')
 
     // Tests
     mkdirp.sync('test');
-    this.template('_test-greeting.js', 'test/test-greeting.js');
-    this.template('_test-load.js', 'test/test-load.js');
+    this.fs.copyTpl(
+      this.templatePath('_test-greeting.js'),
+      this.destinationPath('test/test-greeting.js'),
+      this
+    )
+    this.fs.copyTpl(
+      this.templatePath('_test-load.js'),
+      this.destinationPath('test/test-load.js'),
+      this
+    )
 
-    // Readme
-    this.template('_README.md', 'README.md');
-  },
+    if (this.bower) { this.autocopy('_bower.json'); }
 
-  projectfiles: function () {
-    if (this.bower) { this.template('_bower.json', 'bower.json'); }
-    this.copy('editorconfig', '.editorconfig');
-    this.copy('jshintrc'    , '.jshintrc');
   }
 
-
-
-});
-
-module.exports = TypescriptGenerator;
+  install () { this.installDependencies() }
+};
