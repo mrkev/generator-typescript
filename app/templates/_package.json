@@ -12,6 +12,7 @@
     "gulp-tsc": "^0.10.1",
     "gulp-shell": "^0.4.2",
     "gulp-tslint": "^2.0.0",
+    "gulp-typings": "^2.0.4",
     "run-sequence":"^1.2.2",
     "mocha" : "*"
   },

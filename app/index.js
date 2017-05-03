@@ -4,6 +4,7 @@ const yosay = require('yosay');
 const chalk = require('chalk');
 const mkdirp = require('mkdirp');
 const Generator = require('yeoman-generator');
+const fs = require('fs')
 
 /////////////////////////////// Helper functions ///////////////////////////////
 
@@ -14,7 +15,7 @@ const Generator = require('yeoman-generator');
  * @return {String}      [description]
  */
 function dirFor (path) {
-  if (path.indexOf('.') === -1) { return path; } 
+  if (path.indexOf('.') === -1) { return path; }
   return path.substring(0, path.lastIndexOf('/'));
 }
 
@@ -38,7 +39,7 @@ module.exports = class extends Generator {
     this.log(yosay('Let\'s make some awesome typescript project!'));
     this.log('I will include', chalk.green('JSHint'), 'and', chalk.red('Editorconfig'), 'by default.');
 
-    this.extfeat = {'Throw in some Bower too' : 'bower'};
+    // this.extfeat = {'Throw in some Bower too' : 'bower'};
 
     const prompts = [
     {
@@ -62,14 +63,14 @@ module.exports = class extends Generator {
       type    : 'input',
       name    : 'tsDest',
       message : 'Where should it be compiled to?',
-      default : 'app/build'
+      default : 'build'
     },
 
     {
       type    : 'input',
       name    : 'tsSrc',
       message : 'Where should your typescript go?',
-      default : 'app/src'
+      default : 'src'
     }
 
     ];
@@ -86,7 +87,7 @@ module.exports = class extends Generator {
       if (props.extra !== undefined) {
         for (var i = 0; i < props.extra.length; i++) {
           switch (this.extfeat[i]) {
-            case 'bower'    : {this.bower     = true; } break;
+            // case 'bower'    : {this.bower     = true; } break;
             case 'jshint'   : {this.jshint    = true; } break;
             case 'editorcfg': {this.editorcfg = true; } break;
           }
@@ -103,60 +104,49 @@ module.exports = class extends Generator {
 
   autocopy () {
     [].slice.call(arguments).forEach(file => {
+
+      var dest = file
+        // path to destination
+        .replace(/%.+%/, m => this[m.replace(/%/g, '')] + '/')
+
+      // hidden files
+      dest = dest.replace(/^#/, '.')
+
       // A template
-      if (file[0] === '_') {
+      if (dest[0] === '_') {
         this.fs.copyTpl(
           this.templatePath(file),
-          this.destinationPath(file.substring(1)),
+          this.destinationPath(dest.substring(1)),
           this
         )
-      } 
+      }
 
-      // a normal file
+      // A normal file
       else {
         this.fs.copy(
           this.templatePath(file),
-          this.destinationPath(file)
+          this.destinationPath(dest)
         )
       }
     })
   }
 
-
   writing () {
+
+    this.tsTest = 'test'
+
     // Folders
-    mkdirp.sync(dirFor(this.tsSrc));
-    mkdirp.sync(dirFor(this.tsDest));
+    mkdirp.sync(dirFor(this.tsSrc))
+    mkdirp.sync(dirFor(this.tsDest))
+    mkdirp.sync(dirFor(this.tsTest));
 
-    this.autocopy('index.ts', 'app.ts', 'tslint.json')
+    const files = fs.readdirSync(this.sourceRoot())
+      .filter(x => x !== '.DS_Store')
+      // .filter(x => x !== '_bower.json')
 
-    this.fs.copy(
-      this.templatePath('editorconfig'),
-      this.destinationPath('.editorconfig')
-    )
+    this.autocopy.apply(this, files)
 
-    this.fs.copy(
-      this.templatePath('jshintrc'),
-      this.destinationPath('.jshintrc')
-    )
-
-    this.autocopy('_package.json', '_gulpfile.js', '_README.md')
-
-    // Tests
-    mkdirp.sync('test');
-    this.fs.copyTpl(
-      this.templatePath('_test-greeting.js'),
-      this.destinationPath('test/test-greeting.js'),
-      this
-    )
-    this.fs.copyTpl(
-      this.templatePath('_test-load.js'),
-      this.destinationPath('test/test-load.js'),
-      this
-    )
-
-    if (this.bower) { this.autocopy('_bower.json'); }
-
+    // if (this.bower) { this.autocopy('_bower.json'); }
   }
 
   install () { this.installDependencies() }

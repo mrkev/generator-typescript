@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "types": ["node"],
+      "typeRoots": [
+         "node_modules/@types" // add path to @types
+      ]
+  },
+  "include": [
+    "app/src/**/*.ts",
+    "typings/**/*.ts"
+  ]
+}
